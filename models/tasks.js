@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const taskSchema = new Schema({
-  name: String,
+  //_id: String,
+  name: String, 
   completed: Boolean
 })
 
