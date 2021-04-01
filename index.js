@@ -4,6 +4,8 @@ const app = express()
 const mongoose = require('mongoose')
 const url = 'mongodb://127.0.0.1:27017/task_tracker';
 const routes =require('./routes');
+const port = process.env.PORT || 3000;
+var path = require("path");
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.once('open', _ => {
@@ -14,10 +16,9 @@ db.on('error', err => {
   console.error('connection error:', err)
 })
 
-
-// Make sure you place body-parser before your CRUD handlers!
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
+//app.use('/', express.static(path.join(__dirname+"/client/build/")));
 app.use(function (req, res, next) {
   //Enabling CORS 
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,6 +30,6 @@ app.use(function (req, res, next) {
 
 app.use("/api",routes);
 
-app.listen(3000, function() {
-    console.log('listening on 3000')
+app.listen(port, function() {
+    console.log(`listening on ${port}`)
   })

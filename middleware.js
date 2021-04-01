@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const Config = require("./config");
-exports.authenticate=async(req,res,next)=>{
+exports.authenticate = (req,res,next)=>{
  
     let token = req.headers.authorization;
     jwt.verify(token, Config.jwtsecret, (err, decoded) => {

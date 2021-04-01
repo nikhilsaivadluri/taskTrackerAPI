@@ -5,11 +5,9 @@ const Tasks = require('./models/tasks');
 const Middleware = require("./middleware");
 const jwt = require("jsonwebtoken");
 const Config = require("./config");
-const mongoose = require('mongoose');
 
 
-
-routes.post("/login", async (req, res) => {
+routes.post("/login",  (req, res) => {
     try {
         let name = req.body.name;
         let apikey = req.body.id;
@@ -39,7 +37,7 @@ routes.post("/login", async (req, res) => {
 })
 
 
-routes.post("/tasks", Middleware.authenticate, async (req, res) => {
+routes.post("/tasks", Middleware.authenticate, (req, res) => {
     try {
         let taskname = req.body.name;
 
@@ -66,7 +64,7 @@ routes.post("/tasks", Middleware.authenticate, async (req, res) => {
 
 });
 
-routes.get("/tasks", Middleware.authenticate, async (req, res) => {
+routes.get("/tasks", Middleware.authenticate, (req, res) => {
     try {
 
         Tasks.find({}, function (err, result) {
@@ -174,15 +172,6 @@ routes.get("/dashboard", Middleware.authenticate, async (req, res) => {
     }
 
 });
-
-
-module.exports = routes;
-
-
-
-
-
-
 
 
 module.exports = routes;
